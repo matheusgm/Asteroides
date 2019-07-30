@@ -11,22 +11,11 @@ class Game:
 		pygame.init()
 		pygame.mixer.init()
 		self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
-		self.background = pygame.image.load(os.path.join('images', 'background.jpg'))
-		self.background = smoothscale(self.background,(int(1920*0.8),int(1200*0.6)))
-
-		self.sheet = pygame.image.load(os.path.join('images', 'spaceship.png'))
-		self.nave = []
-		for i in range(3):
-			for j in range(3):
-				self.nave.append(self.sheet.subsurface((j*38,i*40+(i*2),38,40+(i*2))))
-
-		self.x = 50
-
 		pygame.display.set_caption(TITLE)
 		self.clock = pygame.time.Clock()
 		self.running = True
 		self.bg = pygame.image.load('background.jpg')
-		self.bg = smoothscale(self.bg,(int(1920*0.8),int(1200*0.6)))
+		self.bg = smoothscale(self.bg,(int(WIDTH),int(HEIGHT)))
 		self.sps = NAVE(100,100)
 
 	def new(self):

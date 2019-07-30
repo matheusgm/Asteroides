@@ -1,6 +1,6 @@
 # game option/settings
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 1320
+HEIGHT = 700
 FPS = 30
 TITLE = "Game Title"
 

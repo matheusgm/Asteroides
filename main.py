@@ -1,5 +1,7 @@
 import pygame
 from settings import *
+from nave import *
+from pygame.transform import flip,scale,rotate,smoothscale
 
 class Game:
 	def __init__(self):
@@ -10,10 +12,12 @@ class Game:
 		pygame.display.set_caption(TITLE)
 		self.clock = pygame.time.Clock()
 		self.running = True
+		self.bg = pygame.image.load('background.jpg')
+		self.bg = smoothscale(self.bg,(int(1920*0.8),int(1200*0.6)))
+		self.sps = NAVE(100,100)
 
 	def new(self):
 		# Start a new game
-		
 		self.run()
 
 	def run(self):
@@ -27,13 +31,12 @@ class Game:
 
 	def update(self):
 		# Game loop - Update
-		pass
+		self.sps.update()
 
 	def draw(self):
 		# Game loop - Draw
-		self.screen.fill(BLACK)
-
-		
+		self.screen.blit(self.bg,(0,0))
+		self.sps.draw(self.screen)
 		# after drawing everything, flip the display
 		pygame.display.flip()
 

@@ -1,4 +1,6 @@
 import pygame
+import os
+from pygame.transform import flip,scale,rotate,smoothscale
 from settings import *
 
 class Game:
@@ -7,6 +9,17 @@ class Game:
 		pygame.init()
 		pygame.mixer.init()
 		self.screen = pygame.display.set_mode((WIDTH,HEIGHT))
+		self.background = pygame.image.load(os.path.join('images', 'background.jpg'))
+		self.background = smoothscale(self.background,(int(1920*0.8),int(1200*0.6)))
+
+		self.sheet = pygame.image.load(os.path.join('images', 'spaceship.png'))
+		self.nave = []
+		for i in range(3):
+			for j in range(3):
+				self.nave.append(self.sheet.subsurface((j*38,i*40+(i*2),38,40+(i*2))))
+
+		self.x = 50
+
 		pygame.display.set_caption(TITLE)
 		self.clock = pygame.time.Clock()
 		self.running = True
@@ -27,12 +40,20 @@ class Game:
 
 	def update(self):
 		# Game loop - Update
-		pass
+		keys = pygame.key.get_pressed()
+		if keys[pygame.K_d]:
+			self.x +=25
+		elif keys[pygame.K_a]:
+			self.x -=25
+
 
 	def draw(self):
 		# Game loop - Draw
 		self.screen.fill(BLACK)
-
+		self.screen.blit(self.background,(0,0))
+		self.screen.blit(self.nave[1],(self.x,200))
+		for i,el in enumerate(self.nave):
+			self.screen.blit(el,(i*100+50,50))
 		
 		# after drawing everything, flip the display
 		pygame.display.flip()

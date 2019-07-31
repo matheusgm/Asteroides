@@ -19,6 +19,7 @@ class INIMIGO:
         self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
             self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
         self.img = self.rocks[randint(0,len(self.rocks)-1)]
+        
         self.atualizar_pos()
 
     def atualizar_pos(self):

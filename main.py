@@ -60,11 +60,8 @@ class Game:
 		# Game loop - Draw
 		self.screen.blit(self.bg,(0,0))
 		self.sps.draw(self.screen)
-		for i in range(20):
-			pygame.draw.line(self.screen,(255,0,0),(i*50,0),(i*50,HEIGHT),1)
-		for i in range(20):
-			pygame.draw.line(self.screen,(255,0,0),(0,i*50),(WIDTH,i*50),1)
-		
+
+		#self.grid()
 		
 		for el in self.inimigo:
 			el.draw(self.screen)
@@ -88,6 +85,13 @@ class Game:
 	def show_go_screen(self):
 		# Game Over/continue
 		pass
+
+	def grid(self):
+		for i in range(20):
+			pygame.draw.line(self.screen,(255,0,0),(i*50,0),(i*50,HEIGHT),1)
+		for i in range(20):
+			pygame.draw.line(self.screen,(255,0,0),(0,i*50),(WIDTH,i*50),1)
+		
 
 g = Game()
 g.show_start_screen()

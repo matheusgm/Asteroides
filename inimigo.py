@@ -12,9 +12,13 @@ class INIMIGO:
         self.x=randint(0,WIDTH)
         self.y=randint(0,HEIGHT)
 
-        self.pedra = pygame.image.load('rock.png')
-        self.sub = self.pedra.subsurface(0,0,64,64)
+        #self.pedra = pygame.image.load('rock.png')
+        #self.sub = self.pedra.subsurface(0,0,64,64)
 
+        self.sheet = pygame.image.load('spaceship.png')
+        self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
+            self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
+        self.img = self.rocks[randint(0,len(self.rocks)-1)]
         self.atualizar_pos()
 
     def atualizar_pos(self):
@@ -28,7 +32,7 @@ class INIMIGO:
             self.y = HEIGHT+100
 
     def draw(self,screen):
-    	screen.blit(self.sub,(self.x,self.y))
+    	screen.blit(self.img,(self.x,self.y))
 
     def update(self):
         if(self.lado == 0): # DIREITO

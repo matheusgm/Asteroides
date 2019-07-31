@@ -33,21 +33,6 @@ class NAVE:
         for el in self.balas:
             el.draw(screen)
 
-        des = pygame.transform.rotate(self.sub,180*self.ang/np.pi)
-        r = des.get_rect()
-        #print(r)
-        #screen.blit( des,(self.x,self.y))
-        #pygame.draw.rect(screen, (255,0,0),pygame.Rect(r[0],r[1],r[2],r[3]),2)
-
-
-        #screen.blit( pygame.transform.rotate(self.nave,self.a),(self.x,self.y))
-        #screen.blit( pygame.transform.rotate(self.nave,45),(self.x,self.y))
-        #screen.blit( pygame.transform.rotate(self.nave,90),(self.x,self.y))
-        #screen.blit( pygame.transform.rotate(self.nave,135),(self.x,self.y))
-        #screen.blit( pygame.transform.rotate(self.nave,180),(self.x,self.y))
-        #screen.blit( pygame.transform.rotate(self.nave,225),(self.x,self.y))
-        #screen.blit( pygame.transform.rotate(self.nave,270),(self.x,self.y))
-
         # making a copy of the old center of the rectangle  
         old_center = self.rect.center  
         # defining angle of the self.rotation  

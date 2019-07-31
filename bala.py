@@ -16,7 +16,7 @@ class BALA:
 
 
     def draw(self,screen):
-    	print("x: "+str(self.x)+" - y: "+str(self.y)+" - Ang: "+str(self.ang)+" - Ang Normalizado: "+str((self.ang*180)/np.pi))
+    	#print("x: "+str(self.x)+" - y: "+str(self.y)+" - Ang: "+str(self.ang)+" - Ang Normalizado: "+str((self.ang*180)/np.pi))
     	screen.blit(pygame.transform.rotate(self.sub,(self.ang*180)/np.pi),(self.x+(5*np.sin(self.ang)),self.y-(0*np.cos(self.ang))))
 
     def update(self):

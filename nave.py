@@ -13,13 +13,15 @@ class NAVE:
         self.balas=[]
 
         self.nave = pygame.image.load('spaceship.png')
-        self.sub = self.nave.subsurface(39,0,39,40)
-        #self.sub = smoothscale(self.sub,(int(39*4), int(160)))
-        
+
+        #self.nave_parada = smoothscale(self.nave_parada,(int(39*4), int(160)))
+
+        self.img = [self.nave.subsurface(39,0,39,40),self.nave.subsurface(38,38,43,45) ]
+
         self.rot = 0  
         self.rot_speed = 0 
 
-        self.image_orig = self.sub
+        self.image_orig = self.img[0]
         self.image = self.image_orig.copy()   
         self.rect = self.image.get_rect()  
         self.rect.center = (self.x , self.y) 
@@ -56,6 +58,7 @@ class NAVE:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
+            self.image_orig = self.img[1]
             self.x -= self.vel*np.sin(ang_rad)
             self.y -= self.vel*np.cos(ang_rad)
 
@@ -63,7 +66,8 @@ class NAVE:
             self.pontos_verdes.append(self.rect.center)
 
             #print("Rect: {} Center {} Ang: {} Sin: {:.2f} Cos: {:.2f}".format(self.rect,self.rect.center,self.rot,np.sin(ang_rad),np.cos(ang_rad)))
-           
+        else:
+            self.image_orig = self.img[0] 
         if keys[pygame.K_LEFT]:
             self.rot_speed=5
         elif keys[pygame.K_RIGHT]:

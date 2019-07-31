@@ -8,17 +8,21 @@ class BALA:
         self.x = x
         self.y = y
         self.ang = ang
-        self.tam = 38
         self.vel = 15
+        self.saida_bala = 40
+
         self.bala = pygame.image.load('fire_blue.png')
         self.sub = self.bala.subsurface(0,0,30,52)
 
+        self.img = pygame.transform.rotate(self.sub,(self.ang*180)/np.pi)
+        self.img_rect = self.img.get_rect()  
+        self.img_rect.center = self.x-(self.saida_bala*np.sin(self.ang)), self.y-(self.saida_bala*np.cos(self.ang))
 
 
     def draw(self,screen):
-    	#print("x: "+str(self.x)+" - y: "+str(self.y)+" - Ang: "+str(self.ang)+" - Ang Normalizado: "+str((self.ang*180)/np.pi))
-    	screen.blit(pygame.transform.rotate(self.sub,(self.ang*180)/np.pi),(self.x+(5*np.sin(self.ang)),self.y-(0*np.cos(self.ang))))
+    	screen.blit(self.img,self.img_rect)
 
     def update(self):
-        self.y-=self.vel*np.cos(self.ang)
-        self.x-=self.vel*np.sin(self.ang)
+        self.x -= self.vel*np.sin(self.ang)
+        self.y -= self.vel*np.cos(self.ang)
+        self.img_rect.center = self.x-(self.saida_bala*np.sin(self.ang)), self.y-(self.saida_bala*np.cos(self.ang))

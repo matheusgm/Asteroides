@@ -35,7 +35,8 @@ class Game:
 		#self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
             #self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
 
-		self.jair_music = pygame.mixer.Sound('bolso1.wav')
+		self.jair_music = pygame.mixer.Sound('Taoquei_.wav')
+		self.jair_morre = pygame.mixer.Sound('Sefoder.wav')
 
 	def new(self):
 		# Start a new game
@@ -76,6 +77,7 @@ class Game:
 				for bala in self.sps.balas:
 					if(self.collision(el.quad_objeto(),bala.quad_objeto())):
 						if(el.img == self.img_inimigos[0]): # Se for o Jair, aparece os 3 filhos
+							self.jair_morre.play()
 							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[1]))
 							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[2]))
 							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[3]))

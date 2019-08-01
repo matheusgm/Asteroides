@@ -35,9 +35,7 @@ class Game:
 		#self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
             #self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
 
-        
-
-		pygame.mixer.music.load('bolso1.wav')
+		self.jair_music = pygame.mixer.Sound('bolso1.wav')
 
 	def new(self):
 		# Start a new game
@@ -65,8 +63,9 @@ class Game:
 			if(temp_novo % 1 == 0):
 				ind_img = randint(0,len(self.img_inimigos)-1)
 				self.inimigo.append(INIMIGO(randint(0,WIDTH),randint(0,HEIGHT),randint(0,3), randint(0,180),randint(10,100)/10,self.img_inimigos[ind_img]))
-				if(ind_img == 0):
-					pygame.mixer.music.play()
+				if(ind_img == 0): # Se for o Jair, toca a musica
+					self.jair_music.play()
+
 		#print(len(self.inimigo))
 
 		for el in self.inimigo:

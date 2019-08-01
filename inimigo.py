@@ -19,13 +19,13 @@ class INIMIGO:
 
     def atualizar_pos(self):
         if(self.lado == 0):
-            self.x = WIDTH+100
+            self.x = WIDTH+50
         elif(self.lado==1):
-            self.y = 0-100
+            self.y = 0-50
         elif(self.lado==2):
-            self.x = 0-100
+            self.x = 0-50
         elif(self.lado==3):
-            self.y = HEIGHT+100
+            self.y = HEIGHT+50
 
     def draw(self,screen):
         screen.blit(self.img,(self.x,self.y))

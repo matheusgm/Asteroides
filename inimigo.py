@@ -1,9 +1,9 @@
 import pygame
+from pygame import mixer
 from settings import *
 from pygame.transform import flip,scale,rotate,smoothscale
 import numpy as np
 from random import randint
-import subprocess
 
 class INIMIGO:
     def __init__(self):
@@ -26,7 +26,9 @@ class INIMIGO:
             self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
         self.img = self.cla[randint(0,len(self.cla)-1)]
         if self.img == self.cla[0]:
-            subprocess.call(["afplay","bolso1.wav"])
+            mixer.init()
+            mixer.music.load('bolso1.wav')
+            mixer.music.play()
 
 
         self.atualizar_pos()

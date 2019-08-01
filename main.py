@@ -19,10 +19,25 @@ class Game:
 		self.running = True
 		self.bg = pygame.image.load('background.jpg')
 		self.bg = smoothscale(self.bg,(int(WIDTH),int(HEIGHT)))
-		self.sps = NAVE(400,400)
+
+		balas = pygame.image.load('fire_blue.png')
+		img_bala = balas.subsurface(0,0,30,52)
+		self.sps = NAVE(400,400,img_bala)
+
 		self.inimigo = []
 		self.start_time = time.time()
 		self.temp_antigo = -1
+
+		self.img_inimigos = [pygame.image.load('minibolso.png'),pygame.image.load('minicarlos.png'),
+							pygame.image.load('minidudu.png'),pygame.image.load('miniflavio.png')]
+
+		#self.sheet = pygame.image.load('spaceship.png')
+		#self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
+            #self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
+
+        
+
+		pygame.mixer.music.load('bolso1.wav')
 
 	def new(self):
 		# Start a new game
@@ -48,7 +63,10 @@ class Game:
 			#print(temp_novo)
 			self.temp_antigo = temp_novo
 			if(temp_novo % 1 == 0):
-				self.inimigo.append(INIMIGO())
+				ind_img = randint(0,len(self.img_inimigos)-1)
+				self.inimigo.append(INIMIGO(randint(0,WIDTH),randint(0,HEIGHT),randint(0,3), randint(0,180),randint(10,100)/10,self.img_inimigos[ind_img]))
+				if(ind_img == 0):
+					pygame.mixer.music.play()
 		#print(len(self.inimigo))
 
 		for el in self.inimigo:
@@ -58,10 +76,10 @@ class Game:
 			else:
 				for bala in self.sps.balas:
 					if(self.collision(el.quad_objeto(),bala.quad_objeto())):
-						if(el.img == el.cla[0]):
-							self.inimigo.append(INIMIGO([el.x,el.y],1))
-							self.inimigo.append(INIMIGO([el.x,el.y],2))
-							self.inimigo.append(INIMIGO([el.x,el.y],3))
+						if(el.img == self.img_inimigos[0]): # Se for o Jair, aparece os 3 filhos
+							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[1]))
+							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[2]))
+							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[3]))
 						self.sps.balas.remove(bala)
 						self.inimigo.remove(el)
 

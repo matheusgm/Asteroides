@@ -7,16 +7,14 @@ import time
 
 
 class NAVE:
-    def __init__(self,x_centro,y_centro):
+    def __init__(self,x_centro,y_centro,img_bala):
         self.x_centro = x_centro
         self.y_centro = y_centro
         self.vel = 5
         self.balas=[]
+        self.img_bala = img_bala
 
         self.nave = pygame.image.load('spaceship.png')
-
-        #self.nave_parada = smoothscale(self.nave_parada,(int(39*4), int(160)))
-
         self.img = [self.nave.subsurface(39,0,39,40),self.nave.subsurface(38,38,43,45) ]
 
         self.rot = 0
@@ -86,7 +84,7 @@ class NAVE:
         if self.delta_tiro >= 1/TIROS_POR_SEGUNDO:
             self.delta_tiro = 0
             self.start_time = time.time()
-            self.balas.append(BALA(self.rect.center[0],self.rect.center[1],ang_rad))
+            self.balas.append(BALA(self.rect.center[0],self.rect.center[1],ang_rad,self.img_bala))
         else:
             end_time = time.time()
             self.delta_tiro = round(end_time - self.start_time,1)

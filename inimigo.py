@@ -1,52 +1,21 @@
 import pygame
-from pygame import mixer
 from settings import *
 from pygame.transform import flip,scale,rotate,smoothscale
 import numpy as np
 from random import randint
 
 class INIMIGO:
-    def __init__(self,pos=None,filho = None):
-        if(pos==None):
-            self.randomico()
-        else:
-            self.lado = 5
-            self.ang = randint(0,359)
-            self.vel = randint(20,40)/10
-            self.x = pos[0]
-            self.y = pos[1]
+    def __init__(self,x,y,lado,ang,vel,img):
 
-        #self.pedra = pygame.image.load('rock.png')
-        #self.sub = self.pedra.subsurface(0,0,64,64)
-
-        self.sheet = pygame.image.load('spaceship.png')
-        self.jair = pygame.image.load('minibolso.png')
-        self.carlos = pygame.image.load('minicarlos.png')
-        self.dudu = pygame.image.load('minidudu.png')
-        self.flavio = pygame.image.load('miniflavio.png')
-
-        self.cla = [self.jair,self.carlos,self.dudu,self.flavio]
-        #self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
-            #self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
-
-        self.img = self.cla[randint(0,len(self.cla)-1)]
-        if(filho != None):
-            self.img = self.cla[filho]
-
-        if self.img == self.cla[0]:
-            mixer.init()
-            mixer.music.load('bolso1.wav')
-            mixer.music.play()
-
+        self.lado = lado
+        self.ang = ang
+        self.vel = vel
+        self.x = x
+        self.y = y
+        self.img = img
 
         self.atualizar_pos()
 
-    def randomico(self):
-        self.lado = randint(0,3)
-        self.ang = randint(0,180)
-        self.vel = randint(10,100)/10
-        self.x=randint(0,WIDTH)
-        self.y=randint(0,HEIGHT)
 
     def atualizar_pos(self):
         if(self.lado == 0):

@@ -4,17 +4,14 @@ from pygame.transform import flip,scale,rotate,smoothscale
 import numpy as np
 
 class BALA:
-    def __init__(self,x_centro,y_centro,ang):
+    def __init__(self,x_centro,y_centro,ang,img):
         self.x_centro = x_centro
         self.y_centro = y_centro
         self.ang = ang
         self.vel = 15
         self.saida_bala = 40
 
-        self.bala = pygame.image.load('fire_blue.png')
-        self.sub = self.bala.subsurface(0,0,30,52)
-
-        self.img = pygame.transform.rotate(self.sub,(self.ang*180)/np.pi)
+        self.img = pygame.transform.rotate(img,(self.ang*180)/np.pi)
         self.img_rect = self.img.get_rect()  
         self.img_rect.center = self.x_centro-(self.saida_bala*np.sin(self.ang)), self.y_centro-(self.saida_bala*np.cos(self.ang))
 

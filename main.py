@@ -55,6 +55,15 @@ class Game:
 			el.update()
 			if(el.x <= 0-200 or el.x >= WIDTH+200 or el.y >=HEIGHT+200 or el.y <=0-200):
 				self.inimigo.remove(el)
+			else:
+				for bala in self.sps.balas:
+					if(self.collision(el.quad_objeto(),bala.quad_objeto())):
+						if(el.img == el.cla[0]):
+							self.inimigo.append(INIMIGO([el.x,el.y],1))
+							self.inimigo.append(INIMIGO([el.x,el.y],2))
+							self.inimigo.append(INIMIGO([el.x,el.y],3))
+						self.sps.balas.remove(bala)
+						self.inimigo.remove(el)
 
 		self.sps.update()
 
@@ -93,6 +102,12 @@ class Game:
 			pygame.draw.line(self.screen,(255,0,0),(i*50,0),(i*50,HEIGHT),1)
 		for i in range(20):
 			pygame.draw.line(self.screen,(255,0,0),(0,i*50),(WIDTH,i*50),1)
+
+	def detectCollisions(self,x1,y1,w1,h1,x2,y2,w2,h2):
+		return x1 < x2+w2 and x2 < x1+w1 and y1 < y2+h2 and y2 < y1+h1
+
+	def collision(self, player, objeto):
+		return self.detectCollisions(player[0], player[1], player[2], player[3], objeto[0], objeto[1], objeto[2], objeto[3])
 
 g = Game()
 g.show_start_screen()

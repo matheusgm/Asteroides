@@ -7,9 +7,9 @@ import time
 
 
 class NAVE:
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+    def __init__(self,x_centro,y_centro):
+        self.x_centro = x_centro
+        self.y_centro = y_centro
         self.vel = 5
         self.balas=[]
 
@@ -25,7 +25,7 @@ class NAVE:
         self.image_orig = self.img[0]
         self.image = self.image_orig.copy()
         self.rect = self.image.get_rect()
-        self.rect.center = (self.x , self.y)
+        self.rect.center = (self.x_centro , self.y_centro)
 
         self.pontos_verdes=[]
 
@@ -46,7 +46,7 @@ class NAVE:
     def update(self):
         for el in self.balas:
             el.update()
-            if(el.x <= 0 or el.x >= WIDTH or el.y >=HEIGHT or el.y <=0):
+            if(el.x_centro <= 0 or el.x_centro >= WIDTH or el.y_centro >=HEIGHT or el.y_centro <=0):
                 self.balas.remove(el)
 
         old_center = self.rect.center
@@ -60,10 +60,10 @@ class NAVE:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
             self.image_orig = self.img[1]
-            self.x -= self.vel*np.sin(ang_rad)
-            self.y -= self.vel*np.cos(ang_rad)
+            self.x_centro -= self.vel*np.sin(ang_rad)
+            self.y_centro -= self.vel*np.cos(ang_rad)
 
-            self.rect.center = self.x, self.y
+            self.rect.center = self.x_centro, self.y_centro
             self.pontos_verdes.append(self.rect.center)
 
             #print("Rect: {} Center {} Ang: {} Sin: {:.2f} Cos: {:.2f}".format(self.rect,self.rect.center,self.rot,np.sin(ang_rad),np.cos(ang_rad)))
@@ -77,24 +77,28 @@ class NAVE:
             self.rot_speed = 0
 
         self.colisao_nave_com_tela()
+        if keys[pygame.K_SPACE]:
+            self.atirar(ang_rad)
+        #print(self.delta_tiro,end=" - ")
+        #print(1/TIROS_POR_SEGUNDO)
 
+    def atirar(self,ang_rad):
         if self.delta_tiro >= 1/TIROS_POR_SEGUNDO:
-            if keys[pygame.K_SPACE]:
-                self.delta_tiro = 0
-                self.start_time = time.time()
-                self.balas.append(BALA(self.rect.center[0],self.rect.center[1],ang_rad))
+            self.delta_tiro = 0
+            self.start_time = time.time()
+            self.balas.append(BALA(self.rect.center[0],self.rect.center[1],ang_rad))
         else:
             end_time = time.time()
             self.delta_tiro = round(end_time - self.start_time,1)
-        #print(self.delta_tiro,end=" - ")
-        #print(1/TIROS_POR_SEGUNDO)
+
     def colisao_nave_com_tela(self):
         #print(self.rect)
-        if self.x < 0:
-            self.x = WIDTH
-        elif self.x > WIDTH:
-            self.x = 0
-        elif self.y < 0:
-            self.y = HEIGHT
-        elif self.y > HEIGHT:
-            self.y = 0
+        if self.x_centro < 0:
+            self.x_centro = WIDTH
+        elif self.x_centro > WIDTH:
+            self.x_centro = 0
+        elif self.y_centro < 0:
+            self.y_centro = HEIGHT
+        elif self.y_centro > HEIGHT:
+            self.y_centro = 0
+    

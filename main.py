@@ -17,10 +17,10 @@ class Game:
 		pygame.display.set_caption(TITLE)
 		self.clock = pygame.time.Clock()
 		self.running = True
-		self.bg = pygame.image.load('background.jpg')
+		self.bg = pygame.image.load(os.path.join('imagens','background.jpg'))
 		self.bg = smoothscale(self.bg,(int(WIDTH),int(HEIGHT)))
 
-		balas = pygame.image.load('fire_blue.png')
+		balas = pygame.image.load(os.path.join('imagens','fire_blue.png'))
 		img_bala = balas.subsurface(0,0,30,52)
 		self.sps = NAVE(400,400,img_bala)
 
@@ -28,8 +28,8 @@ class Game:
 		self.start_time = time.time()
 		self.temp_antigo = -1
 
-		self.img_inimigos = [pygame.image.load('minibolso.png'),pygame.image.load('minicarlos.png'),
-							pygame.image.load('minidudu.png'),pygame.image.load('miniflavio.png')]
+		self.img_inimigos = [pygame.image.load(os.path.join('imagens','minibolso.png')),pygame.image.load(os.path.join('imagens','minicarlos.png')),
+							pygame.image.load(os.path.join('imagens','minidudu.png')),pygame.image.load(os.path.join('imagens','miniflavio.png'))]
 
 		#self.sheet = pygame.image.load('spaceship.png')
 		#self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,

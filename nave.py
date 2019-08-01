@@ -1,4 +1,5 @@
 import pygame
+import os
 from settings import *
 from pygame.transform import flip,scale,rotate,smoothscale
 import numpy as np
@@ -14,7 +15,7 @@ class NAVE:
         self.balas=[]
         self.img_bala = img_bala
 
-        self.nave = pygame.image.load('spaceship.png')
+        self.nave = pygame.image.load(os.path.join('imagens','spaceship.png'))
         self.img = [self.nave.subsurface(39,0,39,40),self.nave.subsurface(38,38,43,45) ]
 
         self.rot = 0

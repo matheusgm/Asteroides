@@ -3,6 +3,7 @@ from settings import *
 from pygame.transform import flip,scale,rotate,smoothscale
 import numpy as np
 from random import randint
+import subprocess
 
 class INIMIGO:
     def __init__(self):
@@ -16,10 +17,18 @@ class INIMIGO:
         #self.sub = self.pedra.subsurface(0,0,64,64)
 
         self.sheet = pygame.image.load('spaceship.png')
+        self.jair = pygame.image.load('minibolso.png')
+        self.carlos = pygame.image.load('minicarlos.png')
+        self.dudu = pygame.image.load('minidudu.png')
+        self.flavio = pygame.image.load('miniflavio.png')
+        self.cla = [self.jair,self.carlos,self.dudu,self.flavio]
         self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
             self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
-        self.img = self.rocks[randint(0,len(self.rocks)-1)]
-        
+        self.img = self.cla[randint(0,len(self.cla)-1)]
+        if self.img == self.cla[0]:
+            subprocess.call(["afplay","bolso1.wav"])
+
+
         self.atualizar_pos()
 
     def atualizar_pos(self):

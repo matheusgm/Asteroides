@@ -5,6 +5,7 @@ import numpy as np
 from bala import *
 import time
 
+
 class NAVE:
     def __init__(self,x,y):
         self.x = x
@@ -18,13 +19,13 @@ class NAVE:
 
         self.img = [self.nave.subsurface(39,0,39,40),self.nave.subsurface(38,38,43,45) ]
 
-        self.rot = 0  
-        self.rot_speed = 0 
+        self.rot = 0
+        self.rot_speed = 0
 
         self.image_orig = self.img[0]
-        self.image = self.image_orig.copy()   
-        self.rect = self.image.get_rect()  
-        self.rect.center = (self.x , self.y) 
+        self.image = self.image_orig.copy()
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.x , self.y)
 
         self.pontos_verdes=[]
 
@@ -32,9 +33,9 @@ class NAVE:
         self.delta_tiro = 1/TIROS_POR_SEGUNDO
 
     def draw(self,screen):
-        
+
         #pygame.draw.circle(screen, (0,255,0),(450,450),50,1)
-        
+
         screen.blit(self.new_image , self.rect)
         #for el in self.pontos_verdes:
             #pygame.draw.circle(screen, (0,255,0),el,10)
@@ -47,13 +48,13 @@ class NAVE:
             el.update()
             if(el.x <= 0 or el.x >= WIDTH or el.y >=HEIGHT or el.y <=0):
                 self.balas.remove(el)
-        
-        old_center = self.rect.center  
-        self.rot = (self.rot + self.rot_speed) % 360  
-        self.new_image = pygame.transform.rotate(self.image_orig , self.rot)  
-        self.rect = self.new_image.get_rect()    
-        self.rect.center = old_center  
-        
+
+        old_center = self.rect.center
+        self.rot = (self.rot + self.rot_speed) % 360
+        self.new_image = pygame.transform.rotate(self.image_orig , self.rot)
+        self.rect = self.new_image.get_rect()
+        self.rect.center = old_center
+
         ang_rad = (np.pi*self.rot)/180
 
         keys = pygame.key.get_pressed()
@@ -67,7 +68,7 @@ class NAVE:
 
             #print("Rect: {} Center {} Ang: {} Sin: {:.2f} Cos: {:.2f}".format(self.rect,self.rect.center,self.rot,np.sin(ang_rad),np.cos(ang_rad)))
         else:
-            self.image_orig = self.img[0] 
+            self.image_orig = self.img[0]
         if keys[pygame.K_LEFT]:
             self.rot_speed=5
         elif keys[pygame.K_RIGHT]:
@@ -76,7 +77,7 @@ class NAVE:
             self.rot_speed = 0
 
         self.colisao_nave_com_tela()
-        
+
         if self.delta_tiro >= 1/TIROS_POR_SEGUNDO:
             if keys[pygame.K_SPACE]:
                 self.delta_tiro = 0
@@ -97,4 +98,3 @@ class NAVE:
             self.y = HEIGHT
         elif self.y > HEIGHT:
             self.y = 0
-        

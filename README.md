@@ -1,12 +1,12 @@
 # Asteroides
-
+A 2D game developed in Python using the `Pygame` library. 
 <p align="left">
   <img src="photo/photo_1.png" width="400" title="game_photo">
 </p>
 
 ## Description
-Asteroides is a 2D game developed in Python using the Pygame library. 
-It is based on the classic arcade game Asteroids which aims to use a spaceship to destroy asteroids that come from any direction. 
+
+It is based on the classic arcade game `Asteroids` which aims to use a spaceship to destroy asteroids that come from any direction. 
 The objective of this project was, working as a team and using the knowledge acquired in the Python language, to develop a game in 1 night focusing on the main game mechanics.
 
 ## Authors

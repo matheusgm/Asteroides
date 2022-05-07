@@ -8,15 +8,14 @@ import time
 
 
 class NAVE:
-    def __init__(self,x_centro,y_centro,img_bala):
+    def __init__(self,x_centro,y_centro,img_bala, img_spaceship):
         self.x_centro = x_centro
         self.y_centro = y_centro
         self.vel = 5
         self.balas=[]
         self.img_bala = img_bala
 
-        self.nave = pygame.image.load(os.path.join('imagens','spaceship.png'))
-        self.img = [self.nave.subsurface(39,0,39,40),self.nave.subsurface(38,38,43,45) ]
+        self.img = [img_spaceship.subsurface(39,0,39,40),img_spaceship.subsurface(38,38,43,45) ]
 
         self.rot = 0
         self.rot_speed = 0

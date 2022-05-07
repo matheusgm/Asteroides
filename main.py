@@ -21,22 +21,24 @@ class Game:
 		self.bg = smoothscale(self.bg,(int(WIDTH),int(HEIGHT)))
 
 		balas = pygame.image.load(os.path.join('imagens','fire_blue.png'))
-		img_bala = balas.subsurface(0,0,30,52)
-		self.sps = NAVE(400,400,img_bala)
+		img_bala = balas.subsurface(0,0,32,52)
+
+		spaceship_img = pygame.image.load(os.path.join('imagens','spaceship.png'))
+
+		self.sps = NAVE(400,400,img_bala,spaceship_img)
 
 		self.inimigo = []
 		self.start_time = time.time()
 		self.temp_antigo = -1
 
-		self.img_inimigos = [pygame.image.load(os.path.join('imagens','minibolso.png')),pygame.image.load(os.path.join('imagens','minicarlos.png')),
-							pygame.image.load(os.path.join('imagens','minidudu.png')),pygame.image.load(os.path.join('imagens','miniflavio.png'))]
+		self.rocks = [spaceship_img.subsurface(0,151,57,57), spaceship_img.subsurface(62,169,32,33),spaceship_img.subsurface(102,177,14,13) ,
+            spaceship_img.subsurface(0,212,52,44),spaceship_img.subsurface(79,220,19,29) ,spaceship_img.subsurface(90,222,23,24)]
 
-		#self.sheet = pygame.image.load('spaceship.png')
-		#self.rocks = [self.sheet.subsurface(0,151,57,57), self.sheet.subsurface(62,169,32,33),self.sheet.subsurface(102,177,14,13) ,
-            #self.sheet.subsurface(0,212,52,44),self.sheet.subsurface(79,220,19,29) ,self.sheet.subsurface(90,222,23,24)]
-
-		self.jair_music = pygame.mixer.Sound('Taoquei_.wav')
-		self.jair_morre = pygame.mixer.Sound('Sefoder.wav')
+		self.game_music = pygame.mixer.Sound('audio/game_music.wav')
+		self.jair_music = pygame.mixer.Sound('audio/rock_appear.wav')
+		self.jair_music.set_volume(0.1)
+		self.jair_morre = pygame.mixer.Sound('audio/big_rock_explosion.wav')
+		self.jair_morre.set_volume(0.1)
 
 	def new(self):
 		# Start a new game
@@ -45,6 +47,7 @@ class Game:
 	def run(self):
 		# Game loop
 		self.playing = True
+		self.game_music.play(-1)
 		while self.playing:
 			self.clock.tick(FPS)
 			self.events()
@@ -62,8 +65,8 @@ class Game:
 			#print(temp_novo)
 			self.temp_antigo = temp_novo
 			if(temp_novo % 1 == 0):
-				ind_img = randint(0,len(self.img_inimigos)-1)
-				self.inimigo.append(INIMIGO(randint(0,WIDTH),randint(0,HEIGHT),randint(0,3), randint(0,180),randint(10,100)/10,self.img_inimigos[ind_img]))
+				ind_img = randint(0,len(self.rocks)-1)
+				self.inimigo.append(INIMIGO(randint(0,WIDTH),randint(0,HEIGHT),randint(0,3), randint(0,180),randint(10,100)/10,self.rocks[ind_img]))
 				if(ind_img == 0): # Se for o Jair, toca a musica
 					self.jair_music.play()
 
@@ -76,11 +79,11 @@ class Game:
 			else:
 				for bala in self.sps.balas:
 					if(self.collision(el.quad_objeto(),bala.quad_objeto())):
-						if(el.img == self.img_inimigos[0]): # Se for o Jair, aparece os 3 filhos
+						if(el.img == self.rocks[0]): # Se for o Jair, aparece os 3 filhos
 							self.jair_morre.play()
-							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[1]))
-							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[2]))
-							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.img_inimigos[3]))
+							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.rocks[1]))
+							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.rocks[2]))
+							self.inimigo.append(INIMIGO(el.x,el.y,5,randint(0,359),randint(20,40)/10,self.rocks[3]))
 						self.sps.balas.remove(bala)
 						self.inimigo.remove(el)
 

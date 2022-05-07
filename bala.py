@@ -19,8 +19,8 @@ class BALA:
 
 
     def draw(self,screen):
-    	screen.blit(self.img,self.img_rect)
-    	#pygame.draw.rect(screen, (0,255,0),self.quad_objeto())
+        screen.blit(self.img,self.img_rect)
+        #pygame.draw.rect(screen, (0,255,0),self.quad_objeto())
 
     def update(self):
         self.x_centro -= self.vel*np.sin(self.ang)
@@ -30,7 +30,7 @@ class BALA:
         self.info = self.info_quadrado()
 
     def info_quadrado(self):
-    	return {"x":self.img_rect[0],"y":self.img_rect[1],"w":self.img_rect[2],"h":self.img_rect[3]}
-
+        return {"x":self.img_rect[0],"y":self.img_rect[1],"w":self.img_rect[2],"h":self.img_rect[3]}
+        
     def quad_objeto(self):
-    	return pygame.Rect(self.info["x"]+self.info["w"]*0.5/2, self.info["y"]+self.info["h"]*0.5/2, self.info["w"]*0.5, self.info["h"]*0.5)
+        return pygame.Rect(self.info["x"]+self.info["w"]*0.5/2, self.info["y"]+self.info["h"]*0.5/2, self.info["w"]*0.5, self.info["h"]*0.5)

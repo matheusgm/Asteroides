@@ -18,7 +18,7 @@ The objective of this project was, working as a team and using the knowledge acq
   </li>
   <li>
     <span> Paulo Bessa do Rengo Monteiro | </span>
-    <a href="https://www.linkedin.com/in/matheusgm/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+    <a href="https://www.linkedin.com/in/paulo-bessa-do-rego-monteiro-249135220/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
     <a href="https://github.com/Paulo-Bessa"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
   </li>
 </ul>

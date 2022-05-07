@@ -1,3 +1,4 @@
 # Asteroides
-
-![alt text](https://github.com/matheusgm/Asteroides/blob/master/photo/photo_1.png?raw=true)
+<p align="center">
+  <img src="photo/photo_1.png" width="400" title="game_photo">
+</p>
